@@ -15,7 +15,8 @@ clip_processor = CLIPProcessor.from_pretrained("openai/clip-vit-base-patch32")
 rpn_model = fasterrcnn_resnet50_fpn(pretrained=True).eval()
 
 # Load image
-image_path = "ball.jpg"  # Replace with your image
+image_path = image_path = r"A:\studium\München\Praktikum\repo\Master-Praktikum\Challenge1\gun_images\035.jpg"
+  # Replace with your image
 image_pil = Image.open(image_path).convert("RGB")
 image_tensor = ToTensor()(image_pil)
 
@@ -44,7 +45,7 @@ nms_indices = nms(boxes, scores, iou_threshold=0.5)
 boxes = boxes[nms_indices]
 
 # Encode text
-prompt = "a tennis ball"  # change as needed
+prompt = "a gun"  # change as needed
 text_inputs = clip_processor(text=[prompt], return_tensors="pt")
 with torch.no_grad():
     text_features = clip_model.get_text_features(**text_inputs)
